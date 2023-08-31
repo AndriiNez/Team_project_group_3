@@ -59,32 +59,33 @@ public class GameWindow extends JFrame {
                     return;
                 }
 
-                String computerResponse = gameLogic.generateComputerResponse(userInput);
+                    String computerResponse = gameLogic.generateComputerResponse(userInput);
 
-                if (gameLogic.usedCities.size() >= 2 && gameLogic.checkingFirstLastSymbol(userInput)) {
-                    String lastAddedCity = gameLogic.usedCities.get(gameLogic.usedCities.size() - 1);
-                    char lastLetter = Character.toUpperCase(lastAddedCity.charAt(lastAddedCity.length() - 1));
-                    JOptionPane.showMessageDialog(GameWindow.this,
-                            "Місто повинно починатись з " + lastLetter);
-                    textField.setText("");
-                    return;
-                }
+                    if (gameLogic.usedCities.size() >= 2 && gameLogic.checkingFirstLastSymbol(userInput)) {
+                        String lastAddedCity = gameLogic.usedCities.get(gameLogic.usedCities.size() - 1);
+                        char lastLetter = Character.toUpperCase(lastAddedCity.charAt(lastAddedCity.length() - 1));
+                        JOptionPane.showMessageDialog(GameWindow.this,
+                                "Місто повинно починатись з " + lastLetter);
+                        textField.setText("");
+                        return;
+                    }
 
-                if (computerResponse.equals("здаюсь")) {
-                    GameWonWindow gameWonWindow = new GameWonWindow(gameLogic.moveCounter);
-                    gameWonWindow.setVisible(true);
-                    gameLogic.moveCounter++;
-                    gameLogic.clearCollections();
-                    dispose();
+                    if (computerResponse.equals("здаюсь")) {
+                        GameWonWindow gameWonWindow = new GameWonWindow();
+                        gameWonWindow.setVisible(true);
 
-                } else {
-                    textField.setText("");
-                    computerResponseLabel.setText("Відповідь комп'ютера: " + computerResponse);
-                    gameLogic.usedCities.add(userInput.toLowerCase());
-                    gameLogic.usedCities.add(computerResponse.toLowerCase());
-                    gameLogic.moveCounter++;
+                        gameLogic.clearCollections();
+                        dispose();
 
-                }
+                    } else {
+                        textField.setText("");
+                        computerResponseLabel.setText("Відповідь комп'ютера: " + computerResponse);
+                        gameLogic.usedCities.add(userInput.toLowerCase());
+                        gameLogic.usedCities.add(computerResponse.toLowerCase());
+
+
+                    }
+
 
 
             }
@@ -92,7 +93,7 @@ public class GameWindow extends JFrame {
         giveUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameLostWindow gameLostWindow = new GameLostWindow(gameLogic.moveCounter);
+                GameLostWindow gameLostWindow = new GameLostWindow();
                 gameLostWindow.setVisible(true);
                 gameLogic.clearCollections();
                 dispose();

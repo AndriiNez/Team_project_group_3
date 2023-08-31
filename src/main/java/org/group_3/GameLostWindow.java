@@ -6,8 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameLostWindow extends JFrame {
-    public GameLostWindow(int moveCounter) throws HeadlessException {
-        GameLogic gameLogic = new GameLogic();
+    public GameLostWindow() throws HeadlessException {
+
         setTitle("Cities");
         setSize(400, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,7 +18,7 @@ public class GameLostWindow extends JFrame {
         setLocation(x, y);
 
         JPanel panel = new JPanel(new FlowLayout());
-        JLabel label = new JLabel("ГРА ЗАКІНЧЕНА. Кількість ходів: " + moveCounter);
+        JLabel label = new JLabel("ГРА ЗАКІНЧЕНА ");
         panel.add(label);
         JButton playAgainButton = new JButton("Грати знову");
         panel.add(playAgainButton);

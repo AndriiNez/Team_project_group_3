@@ -7,6 +7,22 @@
     <groupId>org.group_3</groupId>
     <artifactId>Team_project_group_3</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <dependencies>
+
+            <!-- Інші залежності -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.14.3</version>
+            </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
