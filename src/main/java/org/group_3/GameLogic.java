@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class GameLogic {
      private char b = 'ь';
+    private char c = 'и';
     // Створюємо додатковий список для збору відповідей.
     static List<String> usedCities = new ArrayList<>();
     // Список міст
@@ -21,7 +22,7 @@ public class GameLogic {
         char lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 1));
 
         //Перевірка на м'який знак здвие на одну букву
-        if (lastLetter == b) {
+        if (lastLetter == b || lastLetter == c ) {
             lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 2));
         }
 
@@ -59,7 +60,7 @@ public class GameLogic {
         char firstLetter = Character.toLowerCase(userInput.charAt(0));
         String lastAddedCity = usedCities.get(usedCities.size() - 1);
         char lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 1));
-        if(lastLetter == b){
+        if(lastLetter == b || lastLetter == c){
              lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 2));
         }
         if (firstLetter != lastLetter) {
