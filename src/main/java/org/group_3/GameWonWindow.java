@@ -7,7 +7,12 @@ import java.awt.event.ActionListener;
 
 public class GameWonWindow extends JFrame {
 
-    public GameWonWindow() throws HeadlessException {
+    private String currentLanguage;
+
+
+    public GameWonWindow(String language) throws HeadlessException {
+        this.currentLanguage = language;
+
 
         setTitle("Cities");
         setSize(400, 200);
@@ -19,27 +24,29 @@ public class GameWonWindow extends JFrame {
         setLocation(x, y);
 
         JPanel panel = new JPanel(new FlowLayout());
-        JLabel label = new JLabel("ВІТАЮ З ПЕРЕМОГОЮ");
+        JLabel label = new JLabel(currentLanguage.equals("ukrainian") ? "ВІТАЮ З ПЕРЕМОГОЮ!" : "Congratulations, You Won!");
         panel.add(label);
-        JButton playAgainButton = new JButton("Грати знову");
+        JButton playAgainButton = new JButton(currentLanguage.equals("ukrainian") ? "Грати знову" : "Play Again");
         panel.add(playAgainButton);
-        JButton closeGameButton = new JButton("Закрити гру");
+        JButton closeGameButton = new JButton(currentLanguage.equals("ukrainian") ? "Закрити гру" : "Close Game");
         panel.add(closeGameButton);
+
         playAgainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameWindow gameWindow = new GameWindow();
-
-                gameWindow.setVisible(true);
+                WelcomeWindow welcomeWindow = new WelcomeWindow();
+                welcomeWindow.setVisible(true);
                 dispose();
             }
         });
+
         closeGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
+
         add(panel);
     }
 }

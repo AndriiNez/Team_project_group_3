@@ -5,25 +5,39 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GameLogic {
-     private char b = 'ь';
-    private char c = 'и';
+public class UkrainianLogic implements GameInterfeceLogir {
+    private final char b = 'ь';
+    private final char c = 'и';
+    private final char d = 'й';
+
+    private final char e = 'ґ';
+
+    private final char f = 'ї';
+
+    private final char g = 'ц';
+
+
     // Створюємо додатковий список для збору відповідей.
-    static List<String> usedCities = new ArrayList<>();
+
     // Список міст
     private List<String> citiesList;
+    public List<String> usedCities = new ArrayList<>();
 
-    public GameLogic() {
-        citiesList = ListCity.downloadCityList();
+    public UkrainianLogic() {
+        citiesList = ListCity.downloadCityListUkrainian();
     }
 
     //Рандомна генерація відповіді комп'ютера
+    @Override
     public String generateComputerResponse(String userInput) {
         char lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 1));
 
         //Перевірка на м'який знак здвие на одну букву
-        if (lastLetter == b || lastLetter == c ) {
+        if (lastLetter == b || lastLetter == c || lastLetter == d || lastLetter == e || lastLetter == f || lastLetter == g) {
             lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 2));
+        }
+        if (userInput.toLowerCase().endsWith("ий")) {
+            lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 3));
         }
 
         List<String> availableCities = new ArrayList<>();
@@ -40,37 +54,38 @@ public class GameLogic {
             citiesList.remove(chosenCity);
             return chosenCity;
         }
-
         return "здаюсь";
     }
 
     //Перевірка на правильність написання назви міста
+    @Override
     public boolean isValidCity(String city) {
         for (String citys : citiesList) {
             if (citys.equalsIgnoreCase(city)) {
                 return false;
             }
-
         }
         return true;
     }
 
     //Перевірека на на писання назви міста за правильної літери
+    @Override
     public boolean checkingFirstLastSymbol(String userInput) {
         char firstLetter = Character.toLowerCase(userInput.charAt(0));
         String lastAddedCity = usedCities.get(usedCities.size() - 1);
         char lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 1));
-        if(lastLetter == b || lastLetter == c){
-             lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 2));
+        if (lastLetter == b || lastLetter == c || lastLetter == d || lastLetter == e || lastLetter == f || lastLetter == g) {
+            lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 2));
         }
-        if (firstLetter != lastLetter) {
-            return true;
+        if (lastAddedCity.toLowerCase().endsWith("ий")) {
+            lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 3));
         }
-        return false;
+        return firstLetter != lastLetter;
     }
 
     //Перевірка на використане місто
-    public static boolean isCityUsed(String city) {
+    @Override
+    public boolean isCityUsed(String city) {
         for (String citys : usedCities) {
             if (citys.equalsIgnoreCase(city)) {
                 return true;
@@ -80,13 +95,12 @@ public class GameLogic {
     }
 
     //Чистка списків для гри знову
+    @Override
     public void clearCollections() {
         citiesList.clear();
         usedCities.clear();
 
     }
-
-
 }
 
 

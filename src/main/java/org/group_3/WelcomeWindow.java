@@ -5,10 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class WelcomeWindow extends JFrame {
     public WelcomeWindow() throws HeadlessException {
         setTitle("Cities");
-        setSize(400, 100);
+        setSize(400, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -21,16 +22,26 @@ public class WelcomeWindow extends JFrame {
         JLabel label = new JLabel("Вітаємо Вас у грі");
         panel.add(label);
 
-        JButton startButton = new JButton("Почати гру");
+        JButton startButton = new JButton("Почати гру Українською мовою");
+        JButton startButton2 = new JButton("Start the game in English");
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameWindow gameWindow = new GameWindow();
-                gameWindow.setVisible(true);
+                UkrainianGameWindow ukrainianGameWindow = new UkrainianGameWindow();
+                ukrainianGameWindow.setVisible(true);
+                dispose();
+            }
+        });
+        startButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EnglishGameWindow englishGameWindow = new EnglishGameWindow();
+                englishGameWindow.setVisible(true);
                 dispose();
             }
         });
         panel.add(startButton);
+        panel.add(startButton2);
 
         add(panel);
     }

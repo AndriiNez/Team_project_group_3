@@ -6,7 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameLostWindow extends JFrame {
-    public GameLostWindow() throws HeadlessException {
+    private String currentLanguage;
+
+
+    public GameLostWindow(String language) throws HeadlessException {
+        this.currentLanguage = language;
 
         setTitle("Cities");
         setSize(400, 100);
@@ -18,19 +22,18 @@ public class GameLostWindow extends JFrame {
         setLocation(x, y);
 
         JPanel panel = new JPanel(new FlowLayout());
-        JLabel label = new JLabel("ГРА ЗАКІНЧЕНА ");
+        JLabel label = new JLabel(currentLanguage.equals("ukrainian") ? "ГРА ЗАКІНЧЕНА" : "Game Over");
         panel.add(label);
-        JButton playAgainButton = new JButton("Грати знову");
+        JButton playAgainButton = new JButton(currentLanguage.equals("ukrainian") ? "Грати знову" : "Play Again");
         panel.add(playAgainButton);
-        JButton closeGameButton = new JButton("Закрити гру");
+        JButton closeGameButton = new JButton(currentLanguage.equals("ukrainian") ? "Закрити гру" : "Close Game");
         panel.add(closeGameButton);
         playAgainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameWindow gameWindow = new GameWindow();
-                gameWindow.setVisible(true);
-
-                dispose();
+                    WelcomeWindow welcomeWindow = new WelcomeWindow();
+                    welcomeWindow.setVisible(true);
+                    dispose();
             }
         });
         closeGameButton.addActionListener(new ActionListener() {
@@ -40,6 +43,5 @@ public class GameLostWindow extends JFrame {
             }
         });
         add(panel);
-
     }
 }
